@@ -22,6 +22,7 @@ class XGBoostRULModel:
         subsample: float = 0.8,
         colsample_bytree: float = 0.8,
         random_state: int = 42,
+        **kwargs,
     ):
         self.params = {
             "n_estimators": n_estimators,
@@ -30,9 +31,10 @@ class XGBoostRULModel:
             "subsample": subsample,
             "colsample_bytree": colsample_bytree,
             "random_state": random_state,
-            "objective": "reg:squarederror",
-            "n_jobs": -1,
+            "objective": kwargs.get("objective", "reg:squarederror"),
+            "n_jobs": kwargs.get("n_jobs", -1),
         }
+        self.params.update(kwargs)
         self.model = XGBRegressor(**self.params)
         self.feature_names: List[str] = []
         self.explainer: Optional[Any] = None
