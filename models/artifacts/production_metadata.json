@@ -1,0 +1,17 @@
+{
+  "champion_model": "lstm",
+  "dataset": "FD001",
+  "xgboost_metrics": {
+    "mae": 15.3396,
+    "rmse": 19.6086,
+    "r2_score": 0.4756,
+    "nasa_asymmetric_score": 1514.28
+  },
+  "lstm_metrics": {
+    "mae": 13.2222,
+    "rmse": 18.4595,
+    "r2_score": 0.5352,
+    "nasa_asymmetric_score": 1588.46
+  },
+  "trained_at": "2026-09-06T16:18:05.726562"
+}

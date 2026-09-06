@@ -1,0 +1,28 @@
+stages:
+  prepare:
+    cmd: python -c "from src.ingestion.cmapss_loader import CMAPSSDataLoader; CMAPSSDataLoader().load_or_generate_data('FD001')"
+    deps:
+      - src/ingestion/cmapss_loader.py
+    params:
+      - prepare.dataset
+      - prepare.clip_rul
+    outs:
+      - data/processed/train_FD001.parquet
+      - data/processed/test_FD001.parquet
+
+  train:
+    cmd: python -m src.models.train --dataset FD001 --epochs 25
+    deps:
+      - data/processed/train_FD001.parquet
+      - data/processed/test_FD001.parquet
+      - src/features/engineering.py
+      - src/models/baseline_xgb.py
+      - src/models/deep_lstm.py
+      - src/models/train.py
+    params:
+      - train.xgboost.n_estimators
+      - train.lstm.epochs
+    outs:
+      - models/artifacts/scaler.joblib
+      - models/artifacts/xgboost_model.joblib
+      - models/artifacts/production_metadata.json

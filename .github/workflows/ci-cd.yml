@@ -1,0 +1,93 @@
+name: Sentinel AI CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  lint-and-test:
+    name: Code Quality & Automated Pytest
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install flake8 pytest pytest-cov
+
+      - name: Lint with flake8
+        run: |
+          # Stop build if there are Python syntax errors or undefined names
+          flake8 src tests --count --select=E9,F63,F7,F82 --show-source --statistics
+          # Warning level checks
+          flake8 src tests --count --exit-zero --max-complexity=12 --max-line-length=127 --statistics
+
+      - name: Run Test Suite with Coverage
+        run: |
+          python -m pytest tests/ -v --cov=src --cov-report=xml
+
+  train-and-evaluate:
+    name: Verify Model Training & Baseline Metrics
+    needs: lint-and-test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Execute Model Training Pipeline (Quick Mode)
+        run: |
+          python -m src.models.train --quick --epochs 3
+
+      - name: Verify Model Artifacts Exist
+        run: |
+          test -f models/artifacts/xgboost_model.joblib || exit 1
+          test -f models/artifacts/scaler.joblib || exit 1
+          test -f models/artifacts/production_metadata.json || exit 1
+
+  build-containers:
+    name: Build & Smoke Test Docker Containers
+    needs: train-and-evaluate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build API Docker Image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          push: false
+          tags: harshal/sentinel-ai-api:latest
+
+      - name: Build Dashboard Docker Image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile.dashboard
+          push: false
+          tags: harshal/sentinel-dashboard:latest

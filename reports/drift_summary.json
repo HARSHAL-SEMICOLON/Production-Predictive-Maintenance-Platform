@@ -1,0 +1,124 @@
+{
+  "status": "success",
+  "timestamp": "2026-09-06T16:32:32.908571",
+  "drift_detected": false,
+  "drift_share": 0.0,
+  "drifted_features_count": 0,
+  "total_features_evaluated": 14,
+  "drifted_features": [],
+  "feature_details": {
+    "sensor_2": {
+      "p_value": 0.89458,
+      "ks_statistic": 0.0784,
+      "is_drifted": false,
+      "baseline_mean": 642.88,
+      "current_mean": 642.95,
+      "mean_shift_pct": 0.01
+    },
+    "sensor_3": {
+      "p_value": 0.24196,
+      "ks_statistic": 0.142,
+      "is_drifted": false,
+      "baseline_mean": 1591.81,
+      "current_mean": 1592.8,
+      "mean_shift_pct": 0.06
+    },
+    "sensor_4": {
+      "p_value": 0.81811,
+      "ks_statistic": 0.0864,
+      "is_drifted": false,
+      "baseline_mean": 1410.1,
+      "current_mean": 1411.09,
+      "mean_shift_pct": 0.07
+    },
+    "sensor_7": {
+      "p_value": 0.7756,
+      "ks_statistic": 0.0903,
+      "is_drifted": false,
+      "baseline_mean": 552.65,
+      "current_mean": 552.5,
+      "mean_shift_pct": -0.03
+    },
+    "sensor_8": {
+      "p_value": 0.69581,
+      "ks_statistic": 0.0972,
+      "is_drifted": false,
+      "baseline_mean": 2388.13,
+      "current_mean": 2388.14,
+      "mean_shift_pct": 0.0
+    },
+    "sensor_9": {
+      "p_value": 0.14617,
+      "ks_statistic": 0.1583,
+      "is_drifted": false,
+      "baseline_mean": 9047.43,
+      "current_mean": 9046.01,
+      "mean_shift_pct": -0.02
+    },
+    "sensor_11": {
+      "p_value": 0.83519,
+      "ks_statistic": 0.0848,
+      "is_drifted": false,
+      "baseline_mean": 47.64,
+      "current_mean": 47.67,
+      "mean_shift_pct": 0.06
+    },
+    "sensor_12": {
+      "p_value": 0.25788,
+      "ks_statistic": 0.1398,
+      "is_drifted": false,
+      "baseline_mean": 521.27,
+      "current_mean": 521.12,
+      "mean_shift_pct": -0.03
+    },
+    "sensor_13": {
+      "p_value": 0.50959,
+      "ks_statistic": 0.113,
+      "is_drifted": false,
+      "baseline_mean": 2388.14,
+      "current_mean": 2388.15,
+      "mean_shift_pct": 0.0
+    },
+    "sensor_14": {
+      "p_value": 0.42572,
+      "ks_statistic": 0.1208,
+      "is_drifted": false,
+      "baseline_mean": 8123.56,
+      "current_mean": 8121.5,
+      "mean_shift_pct": -0.03
+    },
+    "sensor_15": {
+      "p_value": 0.51963,
+      "ks_statistic": 0.1121,
+      "is_drifted": false,
+      "baseline_mean": 8.45,
+      "current_mean": 8.45,
+      "mean_shift_pct": 0.05
+    },
+    "sensor_17": {
+      "p_value": 0.2883,
+      "ks_statistic": 0.1358,
+      "is_drifted": false,
+      "baseline_mean": 393.64,
+      "current_mean": 393.96,
+      "mean_shift_pct": 0.08
+    },
+    "sensor_20": {
+      "p_value": 0.10648,
+      "ks_statistic": 0.1678,
+      "is_drifted": false,
+      "baseline_mean": 38.74,
+      "current_mean": 38.71,
+      "mean_shift_pct": -0.08
+    },
+    "sensor_21": {
+      "p_value": 0.05063,
+      "ks_statistic": 0.1881,
+      "is_drifted": false,
+      "baseline_mean": 23.24,
+      "current_mean": 23.23,
+      "mean_shift_pct": -0.07
+    }
+  },
+  "html_report_path": "E:\\RESUME PROJECTS\\Production Predictive Maintenance Platform\\reports\\drift_report.html"
+}
